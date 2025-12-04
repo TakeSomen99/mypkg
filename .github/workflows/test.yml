@@ -1,6 +1,6 @@
 name: test
 on: push
-job:
+jobs:
   test:
     runs-on: Ubuntu22.04
     container: ryuichiueda/ubuntu22.04-ros2:latest
