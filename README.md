@@ -40,6 +40,7 @@ from devicd_msgs.srv import Device
 $ git clone https://github.com/TakeSomen99/device_msgs.git
 $ cd device_msgs
 $ colcon build
+$ cd ..
 $ source install/setup.bash
 $ git clone https://github.com/TakeSomen99/mypkg.git
 $ cd mypkg
