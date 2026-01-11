@@ -37,8 +37,11 @@ from devicd_msgs.srv import Device
 
 以下は**ELECOM製UVC WEBカメラ UCAM-CC310FBBK** をRaspberry Pi 3BのUSB2.0ポートへつないだ時の実行例です。
 ```bash
-$ git clone https://github.com/TakeSomen99/mypkg.git
 $ git clone https://github.com/TakeSomen99/device_msgs.git
+$ cd device_msgs
+$ colcon build
+$ source install/setup.bash
+$ git clone https://github.com/TakeSomen99/mypkg.git
 $ cd mypkg
 $ colcon build
 $ source install/setup.bash
