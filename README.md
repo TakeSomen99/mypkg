@@ -16,11 +16,18 @@ Raspberry Piを含むUSB付きシングルボードコンピュータに接続�
   + Python 3.10, 3.11, 3.12
   + CMake 3.26, 3.27, 3.28
 
+## パッケージ・サービス型一覧
+|パッケージ名|概要|リンク|
+|:---:|:---:|:---:|
+|mypkg|USB付きマイコン等から接続されたデバイスの製品名を取得します。|https://github.com/TakeSomen99/mypkg.git|
+|device_msgs|本パッケージで扱うメッセージ型を定義します。|https://github.com/TakeSomen99/device_msgs.git|
+
 ## 使用方法
-本パッケージは以下の3つのファイルを含むサービス型通信を実現します。
+本パッケージは以下の2つのファイルを含むサービス型通信を実現します。
 + src/mypkg/mypkg/server.py
 + src/mypkg/mypkg/client.py
-+ src/device_msgs/srv/Device.srv
+
+また、本パッケージを利用すするにあたり
 
 server.pyはマイコン等外部USB機器を使用する側で起動させてください。起動後server.pyはクライアントの要望に応じてDevice.srvで定義した型に則ってUSBデバイスの名前を送信します。メッセージのデータ型は下記の様にインポートすることが出来ます。
 ```python
@@ -30,8 +37,9 @@ from devicd_msgs.srv import Device
 
 以下は**ELECOM製UVC WEBカメラ UCAM-CC310FBBK** をRaspberry Pi 3BのUSB2.0ポートへつないだ時の実行例です。
 ```bash
-$ git clone https://github.com/TakeSomen99/ros2_mypkg.git
-$ cd ros2_mypkg
+$ git clone https://github.com/TakeSomen99/mypkg.git
+$ git clone https://github.com/TakeSomen99/device_msgs.git
+$ cd mypkg
 $ colcon build
 $ source install/setup.bash
 $ ros2 launch mypkg talk_listen.launch.py
