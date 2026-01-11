@@ -12,15 +12,10 @@ from device_msgs.srv import Device
 
 
 def get_usb_video_devices():
-    """
-    外部USB接続の video デバイスのみを列挙し、
-    人間が読める製品名を返す
-    """
     device_names = []
 
     for dev in glob("/dev/video*"):
         try:
-            # udev からデバイス情報取得
             out = subprocess.check_output(
                 ["udevadm", "info", "--query=property", "--name", dev],
                 text=True
@@ -32,11 +27,9 @@ def get_usb_video_devices():
                     k, v = line.split("=", 1)
                     props[k] = v
 
-            # USB 接続デバイスのみ
             if props.get("ID_BUS") != "usb":
                 continue
 
-            # 人間向けの製品名を優先
             name = (
                 props.get("ID_MODEL_FROM_DATABASE")
                 or props.get("ID_MODEL")
