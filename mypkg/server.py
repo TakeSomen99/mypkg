@@ -44,30 +44,27 @@ def get_usb_video_devices():
     return device_names
 
 
-class DeviceService(Node):
-
+class DeviceServer(Node):
     def __init__(self):
-        super().__init__("device_service_node")
-        self.srv = self.create_service(
-            Device,
-            "get_device_names",
-            self.get_device_names_cb
-        )
-        self.get_logger().info("DeviceService ready. Waiting...")
+        super().__init__('device_server')
+        self.create_service(Device, 'device', self.handle_device)
+        self.get_logger().info('Device service ready.')
 
-    def get_device_names_cb(self, request, response):
-        try:
-            response.names = get_usb_video_devices()
-        except Exception as e:
-            self.get_logger().error(f"Failed to get device names: {e}")
-            response.names = []
+    def handle_device(self, request, response):
+        self.get_logger().info("handle_device called")
+        devices = get_usb_video_devices()
+
+        if not devices:
+            response.names = ["no device found"]
+        else:
+            response.names = devices
 
         return response
 
 
 def main():
     rclpy.init()
-    node = DeviceService()
+    node = DeviceServer()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
@@ -77,7 +74,6 @@ def main():
         if rclpy.ok():
             rclpy.shutdown()
         
-
 
 if __name__ == "__main__":
     main()

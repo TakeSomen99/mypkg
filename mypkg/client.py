@@ -1,27 +1,46 @@
 #!/usr/bin/env python3
-#SPDX-FileCopyrightText: 2025 TakeSomen99
-#SPDX-License-Identifier: BSD-3-Clause
-
 import rclpy
 from rclpy.node import Node
 from device_msgs.srv import Device
 
+class DeviceClient(Node):
+    def __init__(self):
+        super().__init__('device_client')
+        self.client = self.create_client(Device, 'device')
+        self.timer = self.create_timer(1.0, self.try_call)
+        self.finished = False
+
+    def try_call(self):
+        if not self.client.service_is_ready():
+            self.get_logger().info('Waiting for service...')
+            return
+
+        self.timer.cancel()
+        req = Device.Request()
+        self.future = self.client.call_async(req)
+        self.future.add_done_callback(self.done_callback)
+
+    def done_callback(self, future):
+        try:
+            response = future.result()
+            self.get_logger().info(f'devices: {response.names}')
+        except Exception as e:
+            self.get_logger().error(str(e))
+        finally:
+            self.finished = True
+            self.destroy_node()
+
 
 def main():
     rclpy.init()
-    node = Node("client")
-
-    client = node.create_client(Device, "get_device_names")
-    while not client.wait_for_service(timeout_sec=1.0):
-        print("Waiting for service...")
-
-    req = Device.Request()
-    future = client.call_async(req)
-    rclpy.spin_until_future_complete(node, future)
-    print(future.result().names)
-    node.destroy_node()
-    rclpy.shutdown()
-
+    node = DeviceClient()
+    try:
+        while rclpy.ok() and not node.finished:
+            rclpy.spin_once(node, timeout_sec=0.1)
+    except KeyboardInterrupt:
+        node.destroy_node()
+    finally:
+        pass
 
 if __name__ == "__main__":
     main()

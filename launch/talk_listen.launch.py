@@ -3,6 +3,8 @@
 #SPDX-License-Identifier: BSD-3-Clause
 
 from launch import LaunchDescription
+from launch.actions import RegisterEventHandler
+from launch.event_handlers import OnProcessExit
 from launch_ros.actions import Node
 
 def generate_launch_description():
@@ -25,4 +27,3 @@ def generate_launch_description():
         server,
         client,
     ])
-

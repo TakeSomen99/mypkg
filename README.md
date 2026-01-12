@@ -1,7 +1,7 @@
-# ros2_mypkg
+# mypkg
 Raspberry Piを含むUSB付きシングルボードコンピュータに接続されている外部デバイスを人間が見て分かりやすい製品名で表示するパッケージです。
 
-![](https://github.com/TakeSomen99/ros2_mypkg/actions/workflows/test.yml/badge.svg)
+![](https://github.com/TakeSomen99/mypkg/actions/workflows/test.yml/badge.svg)
 ![Static Badge](https://img.shields.io/badge/python-blue)
 ![CMake](https://img.shields.io/badge/CMake-3.8%2B-blue?logo=cmake)
 
