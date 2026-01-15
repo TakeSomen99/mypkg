@@ -17,8 +17,8 @@ jobs:
         with:
           path: ros2_ws/src/mypkg
 
-      # --------------------------------------------------
-      # 2. device_msgs を clone（外部依存）
+     i # --------------------------------------------------
+      # 2. devce_msgs を clone（外部依存）
       # --------------------------------------------------
       - name: Clone device_msgs
         run: |
@@ -31,7 +31,7 @@ jobs:
       # --------------------------------------------------
       - name: Source ROS 2
         run: |
-          source /opt/ros/jazzy/setup.bash
+          source install/setup.bash
           echo "ROS_DISTRO=$ROS_DISTRO"
 
       # --------------------------------------------------
