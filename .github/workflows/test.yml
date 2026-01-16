@@ -16,4 +16,6 @@ jobs:
         shell: bash
         run: |
           source /opt/ros/humble/setup.bash
+          export ROS_DOMAIN_ID=99
+          export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
           bash test/test.bash
