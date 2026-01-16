@@ -38,15 +38,12 @@ from devicd_msgs.srv import Device
 以下は**ELECOM製UVC WEBカメラ UCAM-CC310FBBK** をRaspberry Pi 3BのUSB2.0ポートへつないだ時の実行例です。
 ```bash
 $ git clone https://github.com/TakeSomen99/device_msgs.git
-$ cd device_msgs
-$ colcon build
-$ cd ..
-$ source install/setup.bash
 $ git clone https://github.com/TakeSomen99/mypkg.git
-$ cd mypkg
 $ colcon build
 $ source install/setup.bash
 $ ros2 launch mypkg talk_listen.launch.py
+
+#出力例
 [INFO] [launch]: All log files can be found below /home/ubuntu/.ros/log/2025-12-31-22-06-41-492142-raspberrypi-9802
 [INFO] [launch]: Default logging verbosity is set to INFO
 [INFO] [server-1]: process started with pid [9805]
