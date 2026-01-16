@@ -14,7 +14,7 @@ jobs:
 
       - name: Fetch device_msgs
         run: |
-          git clone https://github.com/xxx/device_msgs.git src/device_msgs
+          git clone https://github.com/TakeSomen99/device_msgs.git
 
       - name: Run test script
         shell: bash
