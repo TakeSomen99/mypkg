@@ -12,6 +12,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Fetch device_msgs
+        run: |
+          git clone https://github.com/xxx/device_msgs.git src/device_msgs
+
       - name: Run test script
         shell: bash
         run: |
