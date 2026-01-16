@@ -22,7 +22,13 @@ Raspberry Piを含むUSB付きシングルボードコンピュータに接続�
 |mypkg|USB付きマイコン等から接続されたデバイスの製品名を取得します。|https://github.com/TakeSomen99/mypkg.git|
 |device_msgs|本パッケージで扱うメッセージ型を定義します。|https://github.com/TakeSomen99/device_msgs.git|
 
+## 前提条件
+本パッケージは ROS2環境での利用を前提としています。
+あらかじめ ROS2がインストールされ、colcon が使用可能な状態である必要があります。
+
 ## 使用方法
+本パッケージは ROS2のワークスペース（例: ~/ros2_ws）内での利用を想定しています。
+
 本パッケージは以下の2つのファイルを含むサービス型通信を実現します。
 + src/mypkg/mypkg/server.py
 + src/mypkg/mypkg/client.py
@@ -31,12 +37,14 @@ Raspberry Piを含むUSB付きシングルボードコンピュータに接続�
 
 server.pyはマイコン等外部USB機器を使用する側で起動させてください。起動後server.pyはクライアントの要望に応じてDevice.srvで定義した型に則ってUSBデバイスの名前を送信します。メッセージのデータ型は下記の様にインポートすることが出来ます。
 ```python
-from devicd_msgs.srv import Device
+from device_msgs.srv import Device
 ```
 具体的なサービスの呼び出し例をclient.pyに記載しています。
 
 以下は**ELECOM製UVC WEBカメラ UCAM-CC310FBBK** をRaspberry Pi 3BのUSB2.0ポートへつないだ時の実行例です。
 ```bash
+$ mkdir -p ~/ros2_ws/src
+$ cd ~/ros2_ws/src
 $ git clone https://github.com/TakeSomen99/device_msgs.git
 $ git clone https://github.com/TakeSomen99/mypkg.git
 $ colcon build
