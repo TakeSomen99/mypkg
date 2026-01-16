@@ -4,6 +4,8 @@
 
 set -e
 
+export ROS_DOMAIN_ID=99
+
 WS_DIR=$(cd "$(dirname "$0")/../.." && pwd)
 cd "$WS_DIR"
 
